@@ -31,6 +31,15 @@ class NewFriendForm extends Component {
   handleFirstNameChange(event) {
     this.setState({firstName: event.target.value});
   }
+  handleLastNameChange(event) {
+    this.setState({lastName: event.target.value});
+  }
+  handleTwitterChange(event) {
+    this.setState({twitter: event.target.value});
+  }
+  handleBFFChange(event) {
+    this.setState({isBFF: event.target.value});
+  }
 
   /*Add a Last Name Change Handler below*/
 
@@ -38,10 +47,14 @@ class NewFriendForm extends Component {
 
   handleSaveClick() {
     /*Cache friend from this component's state below*/
+    let friendToAdd = this.state;
 
     /*Trigger this component's prop: onCreateNewFriend and pass in our new friend*/
+    this.props.onCreateNewFriend(friendToAdd);
 
     /*Reset the form fields by setting this component's state to the initial state*/
+    this.setState(this.initialState);
+
   }
 
   componentWillMount() {
@@ -77,17 +90,21 @@ class NewFriendForm extends Component {
 
         {/*Add a Last Name TextField below*/}
         {/*be sure to create an onChange handler*/}
+        <TextField floatingLabelText="Last Name" hintText="Sanchez" value={lastName} onChange={this.handleLastNameChange}></TextField>
 
         {/*Add a Twitter Handle TextField below*/}
         {/*be sure to create an onChange handler*/}
+        <TextField floatingLabelText="Twitter Handle" hintText="@TheRickestRick" value={twitter} onChange={this.handleTwitterChange}></TextField>
 
         {/*Add a Twitter Handle Toggle below*/}
         {/*be sure to create an onToggle handler*/}
         {/*Check the Material UI Docs for Toggle http://www.material-ui.com/#/components/toggle*/}
+        <Toggle label="Is BFF" toggled={isBFF} onToggle={this.handleBFFChange}></Toggle>
 
         {/*Add a Submit FlatButton below*/}
         {/*be sure to create an onClick handler*/}
         {/*Check the Material UI Docs for Toggle http://www.material-ui.com/#/components/flat-button*/}
+        <FlatButton label="Save" primary={true} onClick={this.handleSaveClick}></FlatButton>
 
       </div>
     );
