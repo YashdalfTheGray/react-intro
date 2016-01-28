@@ -29,9 +29,11 @@ class MainDashboard extends Component {
         <div style={styles.mainContentArea}>
           {/*Add a NewFriendForm below*/}
           {/*be sure to hook up the onCreateNewFriend handler*/}
+          <NewFriendForm onCreateNewFriend={this.handleCreateNewFriend}></NewFriendForm>
 
           {/*Add a FriendList below*/}
           {/*Be sure to pass in our friends*/}
+          <FriendList friends={friends}></FriendList>
 
         </div>
         <Footer />
