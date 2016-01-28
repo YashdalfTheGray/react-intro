@@ -27,30 +27,28 @@ import styles from '../styles/rootStyles';
  */
 class Header extends Component {
 
-  /**
-   * React will call render() every time this component's state or props change.
-   * This is default behavior of react, and like all lifecycle methods, all you
-   * need to do is define it in your component and it will do it's thing.
-   *
-   * For more on lifecycle methods, see:
-   * https://facebook.github.io/react/docs/component-specs.html
-   *
-   * Note: Of all the lifecycle methods above, render() is the only one that is
-   * required for all components.
-   */
-  render() {
-
     /**
-     * render() will pretty much always return HTML. This is the biggest
-     * difference in JSX, you just put that HTML out there and it knows what to
-     * do.
+     * React will call render() every time this component's state or props change.
+     * This is default behavior of react, and like all lifecycle methods, all you
+     * need to do is define it in your component and it will do it's thing.
+     *
+     * For more on lifecycle methods, see:
+     * https://facebook.github.io/react/docs/component-specs.html
+     *
+     * Note: Of all the lifecycle methods above, render() is the only one that is
+     * required for all components.
      */
-    return (
-      <div style={styles.headerContainer}>
-        header!
-      </div>
-    );
-  }
+    render() {
+
+        /**
+         * render() will pretty much always return HTML. This is the biggest
+         * difference in JSX, you just put that HTML out there and it knows what to
+         * do.
+         */
+        return (
+            <div style={styles.headerContainer}>header!</div>
+        );
+    }
 }
 
 /**

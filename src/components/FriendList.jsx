@@ -9,79 +9,78 @@ import IconButton from 'material-ui/lib/icon-button';
 import styles from '../styles/rootStyles';
 
 class NewFriendForm extends Component {
-  static propTypes = {
-    friends: PropTypes.array.isRequired
-  }
+    static propTypes = {
+        friends: PropTypes.array.isRequired
+    }
 
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  outputTileElements() {
+    outputTileElements() {
+        /**
+          * ES6 Alert - Arrow Function
+          *
+          * friends.map(friend => {});
+          *
+          * is similar (but not identical) to:
+          *
+          * friends.map(function(friend){});
+          *
+          * The main difference being that this from the parent function will be
+          * bound to our internal function.
+          *
+          * Arrow functions are commonly notated as ()=>{} where you have props
+          * on the left and the function on the right.
+          *
+          * More on Arrow Functions here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+          * or in the ES6 Cheatsheet link in the README
+          */
+        return this.props.friends.map(friend => {
+            let {firstName, lastName, twitter, isBFF} = friend;
+            let key = `${firstName}-${lastName}-${twitter}`;
 
-    /**
-      * ES6 Alert - Arrow Function
-      *
-      * friends.map(friend => {});
-      *
-      * is similar (but not identical) to:
-      *
-      * friends.map(function(friend){});
-      *
-      * The main difference being that this from the parent function will be
-      * bound to our internal function.
-      *
-      * Arrow functions are commonly notated as ()=>{} where you have props
-      * on the left and the function on the right.
-      *
-      * More on Arrow Functions here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
-      * or in the ES6 Cheatsheet link in the README
-      */
-    return this.props.friends.map(friend=>{
-      let {firstName, lastName, twitter, isBFF} = friend;
-      let key = `${firstName}-${lastName}-${twitter}`;
+            // Change our bffIcon to be a solid in star if our friend is a BFF
+            // An example of a solid star from Material UI is shown below
+            // <IconButton><Star color="white"/></IconButton>
+            let bffIcon = isBFF ?
+                <IconButton><Star color="white"/></IconButton> :
+                <IconButton><StarBorder color="white"/></IconButton>;
 
-      // Change our bffIcon to be a solid in star if our friend is a BFF
-      // An example of a solid star from Material UI is shown below
-      // <IconButton><Star color="white"/></IconButton>
-      let bffIcon = isBFF ?
-        <IconButton><Star color="white"/></IconButton> :
-        <IconButton><StarBorder color="white"/></IconButton>;
+            // Create a unique identiconString below to make each friends image unique.
+            // Use any combination of the data you have from props.
+            let identiconString = `${firstName}-${lastName}-${twitter}`;
 
-      // Create a unique identiconString below to make each friends image unique.
-      // Use any combination of the data you have from props.
-      let identiconString = `${firstName}-${lastName}-${twitter}`;
+            // Update the return block below to have *actual* friend data from your form.
+            return(
+                <GridTile
+                    key={key}
+                    style={{fontFamily: 'Roboto, sans-serif'}}
+                    title={`${firstName} ${lastName}`}
+                    subtitle={<span>{`${twitter}`}</span>}
+                    actionIcon={bffIcon}>
+                    <img src={`http://identicon.org?t=${identiconString}&s=200`} />
+                </GridTile>
+            );
+        });
+    }
 
-      // Update the return block below to have *actual* friend data from your form.
-      return(
-        <GridTile
-          key={key}
-          style={{fontFamily: 'Roboto, sans-serif'}}
-          title={`${firstName} ${lastName}`}
-          subtitle={<span>{`${twitter}`}</span>}
-          actionIcon={bffIcon}>
-          <img src={`http://identicon.org?t=${identiconString}&s=200`} />
-        </GridTile>
-      );
-    })
-  }
+    render() {
+        let {friends} = this.props;
+        let tileElements = this.outputTileElements();
 
-  render() {
-    let {friends} = this.props;
-    let tileElements = this.outputTileElements();
-
-    return (
-      <div style={styles.friendListContainer}>
-        <h1 style={styles.formHeading}>You Have {friends.length} Friend(s)</h1>
-          <GridList
-            cellHeight={200}
-            cols={4}
-            style={styles.friendGridList}>
-            {tileElements}
-          </GridList>
-      </div>
-    );
-  }
+        return (
+            <div style={styles.friendListContainer}>
+                <h1 style={styles.formHeading}>You Have {friends.length} Friend(s)</h1>
+                <GridList
+                    cellHeight={200}
+                    cols={4}
+                    style={styles.friendGridList}>
+                    {tileElements}
+                </GridList>
+            </div>
+        );
+    }
 }
 
 export default NewFriendForm;
