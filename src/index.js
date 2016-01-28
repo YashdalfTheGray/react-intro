@@ -8,7 +8,7 @@ import {createStore} from 'redux';
 import MainDashboard from './components/MainDashboard';
 
 let store = createStore(
-  rootReducer
+    rootReducer
 );
 
 /**
@@ -16,10 +16,10 @@ let store = createStore(
  * graph
  */
 ReactDOM.render(
-  <div className="structural-element">
-    <Provider store={store}>
-      <MainDashboard />
-    </Provider>
-  </div>,
-  document.getElementById('root')
+    <div className="structural-element">
+        <Provider store={store}>
+            <MainDashboard />
+        </Provider>
+    </div>,
+    document.getElementById('root')
 );
