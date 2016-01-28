@@ -18,6 +18,7 @@ class MainDashboard extends Component {
     let newFriends = [friend, ...oldFriends];
 
     //Add our newFriends to this component's state below
+    this.setState({friends: newFriends});
   }
 
   render() {
